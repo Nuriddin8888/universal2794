@@ -9,3 +9,4 @@ router = Router()
 @router.message(CommandStart())
 async def start_handler(message: types.Message):
     await message.answer("Salom botga xush kelibsiz")
+    await message.answer("ismingizni kiriting")
