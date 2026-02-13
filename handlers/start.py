@@ -1,7 +1,7 @@
 from aiogram import Router, types, F
 from aiogram.filters import CommandStart
-from database.crud import get_user , add_user 
-
+from database.crud import get_user, add_user 
+from buttons.default import phone_btn, main_keyboard
 
 
 router = Router()
@@ -14,9 +14,9 @@ async def start_handler(message: types.Message):
     user = get_user(user_id)
 
     if user :
-        await message.answer("Salom 🖐")
+        await message.answer("Salom 🖐", reply_markup=main_keyboard)
     else :
-        await message.answer("Telefon raqamingizni yuboring")
+        await message.answer("Telefon raqamingizni yuboring", reply_markup=phone_btn)
 
 
 @router.message(F.contact)
@@ -27,9 +27,5 @@ async def contact_handler(message: types.Message):
     phone_number = message.contact.phone_number
     
     add_user(user_id, full_name, username, phone_number)
-    await message.answer("✅ Ro'yxatdan otdingiz . Rahmat!")
-
-
-
-
+    await message.answer("✅ Ro'yxatdan otdingiz . Rahmat!", reply_markup=main_keyboard)
 
