@@ -1,5 +1,9 @@
 import asyncio
 import logging
+from handlers.pdf import router as pdf_router
+
+
+
 
 from aiogram import Bot, Dispatcher
 
@@ -15,6 +19,7 @@ async def main():
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
     dp.include_router(start.router)
+    dp.include_router(pdf_router)
 
     init_db
     await dp.start_polling(bot)
